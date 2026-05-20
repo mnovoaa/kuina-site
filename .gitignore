@@ -34,3 +34,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# unused assets — not part of the published site
+public/img/altar.jpeg
+public/img/blackwhite.jpeg
+public/img/blue1.jpeg
+public/img/blue2.jpeg
+public/img/blue3.jpeg
+public/img/blue4.jpeg
+public/img/blue5.jpeg
+public/img/blue6.jpeg
+public/img/blue7.jpeg
+public/img/castle.jpeg
+public/img/closeup.jpeg
+public/img/concert.jpeg
+public/img/dark.jpeg
+public/img/mixtape.png
+public/img/portrait.jpeg
+public/img/profile.jpeg
+public/img/tiara.jpeg
+public/img/triptych.jpeg
