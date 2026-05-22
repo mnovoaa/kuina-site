@@ -24,13 +24,14 @@ const DISCOGRAPHY: DiscoItem[] = [
 ];
 
 const GALLERY: GalleryItem[] = [
-  { src: "/img/Castillo1.PNG", alt: "KUINA castillo 1" },
-  { src: "/img/Castillo2.PNG", alt: "KUINA castillo 2" },
-  { src: "/img/Castillo3.PNG", alt: "KUINA castillo 3" },
-  { src: "/img/Castillo4.PNG", alt: "KUINA castillo 4" },
-  { src: "/img/Castillo5.PNG", alt: "KUINA castillo 5" },
-  { src: "/img/Castillo6.PNG", alt: "KUINA castillo 6" },
-  { src: "/img/Castillo7.PNG", alt: "KUINA castillo 7" },
+  { src: "/img/IMG_2405.PNG", alt: "KUINA silueta escenario" },
+  { src: "/img/IMG_2403.PNG", alt: "KUINA en escena azul" },
+  { src: "/img/IMG_2396.PNG", alt: "KUINA luz estadio" },
+  { src: "/img/IMG_2400.PNG", alt: "KUINA en vivo tiara" },
+  { src: "/img/IMG_2404.PNG", alt: "KUINA actuando" },
+  { src: "/img/IMG_2384.PNG", alt: "KUINA flash" },
+  { src: "/img/IMG_2385.PNG", alt: "KUINA" },
+  { src: "/img/Castillo3.PNG", alt: "KUINA castillo" },
 ];
 
 const TOUR: TourItem[] = [
@@ -46,13 +47,14 @@ const TOUR: TourItem[] = [
 
 /* per-image scatter layout — rotate + vertical stagger */
 const GALLERY_META = [
-  { rotate: -2.2, mt: 0,  aspect: "9/16" },
-  { rotate:  1.6, mt: 28, aspect: "9/16" },
-  { rotate: -0.7, mt: 12, aspect: "9/16" },
-  { rotate:  2.4, mt: 40, aspect: "9/16" },
-  { rotate: -1.8, mt: 20, aspect: "9/16" },
-  { rotate:  0.9, mt: 8,  aspect: "9/16" },
-  { rotate: -2.8, mt: 32, aspect: "9/16" },
+  { rotate: -1.8, mt: 0,  aspect: "3/4"  },
+  { rotate:  2.2, mt: 36, aspect: "4/5"  },
+  { rotate: -0.9, mt: 8,  aspect: "3/4"  },
+  { rotate:  1.5, mt: 52, aspect: "4/5"  },
+  { rotate: -2.4, mt: 18, aspect: "3/4"  },
+  { rotate:  0.8, mt: 28, aspect: "4/5"  },
+  { rotate: -1.4, mt: 44, aspect: "1/1"  },
+  { rotate:  2.9, mt: 14, aspect: "4/5"  },
 ];
 
 const CASTLE_LOADER =
@@ -305,16 +307,31 @@ function CornerRabbit() {
     >
       <motion.div animate={spin ? { rotate: 360, scale: 1.3 } : { rotate: 0, scale: 1 }} transition={{ duration: 1, ease: "easeInOut" }} style={{ width: "100%", height: "100%" }}>
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-          <ellipse cx="50" cy="70" rx="24" ry="18" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
-          <ellipse cx="50" cy="50" rx="17" ry="14" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
-          <ellipse cx="40" cy="28" rx="5"  ry="18" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
-          <ellipse cx="60" cy="28" rx="5"  ry="18" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
-          <ellipse cx="40" cy="28" rx="2"  ry="12" fill="#0A2FA0" opacity="0.5" />
-          <ellipse cx="60" cy="28" rx="2"  ry="12" fill="#0A2FA0" opacity="0.5" />
-          <circle cx="44" cy="50" r="2" fill={red ? "#9B0014" : "#4D6EF5"} style={{ transition: "fill 0.3s" }} />
-          <circle cx="56" cy="50" r="2" fill={red ? "#9B0014" : "#4D6EF5"} style={{ transition: "fill 0.3s" }} />
-          <ellipse cx="50" cy="58" rx="1.5" ry="1" fill="#4D6EF5" opacity="0.6" />
-          <path d="M 47 60 Q 50 63 53 60" stroke="#4D6EF5" strokeWidth="0.5" fill="none" opacity="0.6" />
+          {/* body */}
+          <ellipse cx="50" cy="70" rx="24" ry="18" fill="#000B1E" stroke={red ? "#9B0014" : "#4D6EF5"} strokeWidth="0.6" />
+          {/* head */}
+          <ellipse cx="50" cy="50" rx="17" ry="14" fill="#000B1E" stroke={red ? "#9B0014" : "#4D6EF5"} strokeWidth="0.6" />
+          {/* ears */}
+          <ellipse cx="40" cy="28" rx="5" ry="18" fill="#000B1E" stroke={red ? "#9B0014" : "#4D6EF5"} strokeWidth="0.6" />
+          <ellipse cx="60" cy="28" rx="5" ry="18" fill="#000B1E" stroke={red ? "#9B0014" : "#4D6EF5"} strokeWidth="0.6" />
+          {/* inner ears */}
+          <ellipse cx="40" cy="28" rx="2" ry="12" fill={red ? "#9B0014" : "#0A2FA0"} opacity="0.7" />
+          <ellipse cx="60" cy="28" rx="2" ry="12" fill={red ? "#9B0014" : "#0A2FA0"} opacity="0.7" />
+          {/* eyes */}
+          <circle cx="44" cy="50" r="2.2" fill={red ? "#9B0014" : "#4D6EF5"} style={{ transition: "fill 0.3s" }} />
+          <circle cx="56" cy="50" r="2.2" fill={red ? "#9B0014" : "#4D6EF5"} style={{ transition: "fill 0.3s" }} />
+          <circle cx="44.7" cy="49.3" r="0.6" fill="#00060E" />
+          <circle cx="56.7" cy="49.3" r="0.6" fill="#00060E" />
+          {/* nose */}
+          <ellipse cx="50" cy="57" rx="1.2" ry="0.8" fill={red ? "#9B0014" : "#4D6EF5"} opacity="0.8" />
+          {/* pentagram inscribed in torso — tierno y siniestro */}
+          <path d="M50,62 L54,74 L43,67 L57,67 L46,74 Z"
+            fill="none"
+            stroke={red ? "#9B0014" : "#3355DD"}
+            strokeWidth="0.5"
+            opacity={red ? 0.95 : 0.55}
+            style={{ transition: "stroke 0.3s, opacity 0.3s" }}
+          />
         </svg>
       </motion.div>
     </button>
@@ -344,6 +361,32 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
       </motion.div>
       <button onClick={onClose} className="absolute top-4 right-4 border border-celeste text-white w-11 h-11 font-mono text-base transition-all duration-300 hover:bg-celeste hover:text-void focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste" aria-label="Cerrar imagen">✕</button>
     </motion.div>
+  );
+}
+
+/* ─── Star sparkles — scattered hand-drawn glints ───────── */
+function StarField() {
+  const stars = [
+    { top: "11%", left: "6%",   size: 18, dur: 2.4, delay: 0    },
+    { top: "27%", left: "90%",  size: 9,  dur: 3.3, delay: 0.8  },
+    { top: "58%", left: "3%",   size: 12, dur: 2.9, delay: 1.5  },
+    { top: "36%", left: "87%",  size: 7,  dur: 4.2, delay: 0.3  },
+    { top: "78%", left: "19%",  size: 14, dur: 2.1, delay: 2.1  },
+    { top: "7%",  left: "51%",  size: 6,  dur: 3.8, delay: 0.9  },
+    { top: "84%", left: "77%",  size: 10, dur: 2.7, delay: 1.4  },
+    { top: "46%", left: "12%",  size: 5,  dur: 3.5, delay: 1.9  },
+  ];
+  return (
+    <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+      {stars.map((s, i) => (
+        <span key={i} style={{
+          position: "absolute", top: s.top, left: s.left,
+          fontSize: s.size, color: "#4D6EF5", userSelect: "none",
+          textShadow: `0 0 ${s.size}px #3355DD, 0 0 ${s.size * 2}px rgba(77,110,245,0.3)`,
+          animation: `twinkle ${s.dur}s ease-in-out ${s.delay}s infinite`,
+        }}>✦</span>
+      ))}
+    </div>
   );
 }
 
@@ -420,8 +463,21 @@ export default function KuinaPage() {
 
       {/* ═══ HERO ═══ */}
       <section id="hero" className="relative flex flex-col items-center justify-center overflow-hidden min-h-screen px-6">
-        <div aria-hidden className="absolute inset-0 pointer-events-none z-[-1]" style={{ background: "linear-gradient(180deg, #00060E 0%, rgba(10,47,160,0.14) 45%, rgba(0,18,48,0.2) 70%, #00060E 100%)" }} />
-        <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: 0.18 }}>
+        {/* estadio a oscuras — siluetas de escenario apenas visibles */}
+        <div aria-hidden className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <Image src="/img/IMG_2403.PNG" alt="" fill priority sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center 30%", opacity: 0.06, filter: "brightness(0.35) contrast(2.2) saturate(0)" }}
+          />
+        </div>
+        {/* bruma que respira */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none z-0"
+          style={{ background: "radial-gradient(ellipse at 50% 65%, rgba(10,47,160,0.28) 0%, transparent 60%)", animation: "brumaBreathe 7s ease-in-out infinite" }}
+        />
+        {/* gradiente de profundidad */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none z-0" style={{ background: "linear-gradient(180deg, #00060E 0%, rgba(0,6,14,0.4) 40%, rgba(0,6,14,0.5) 70%, #00060E 100%)" }} />
+        {/* brillos estelares */}
+        <StarField />
+        <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none z-0" style={{ opacity: 0.12 }}>
           <svg viewBox="0 0 400 300" className="w-[90%] max-w-[900px]" style={{ filter: "drop-shadow(0 0 30px #0A2FA0)" }}>
             <path d={CASTLE_HERO} fill="none" stroke="#4D6EF5" strokeWidth="0.8" />
           </svg>
@@ -454,26 +510,28 @@ export default function KuinaPage() {
       <section id="about" className="px-5 py-20 md:px-12 md:py-[120px]" style={{ minHeight: "100vh" }}>
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
           <Reveal>
-            {/* mat frame — dark padding + celeste border + glow + tilt */}
+            {/* mat frame — la koneja azul */}
             <div className="grain" style={{
               position: "relative",
               padding: "7px",
               background: "#00060E",
-              border: "1px solid rgba(77,110,245,0.5)",
-              boxShadow: "0 0 0 8px rgba(77,110,245,0.04), 0 0 50px rgba(10,47,160,0.4), 0 30px 80px rgba(0,0,0,0.7)",
-              transform: "rotate(-1.5deg)",
+              border: "1px solid rgba(77,110,245,0.45)",
+              boxShadow: "0 0 0 8px rgba(77,110,245,0.03), 0 0 60px rgba(10,47,160,0.5), 0 40px 100px rgba(0,0,0,0.8)",
+              transform: "rotate(-1.8deg)",
             }}>
               <div style={{ position: "relative", overflow: "hidden" }}>
                 <Image
-                  src="/img/Castillo9.PNG"
-                  alt="KUINA castillo"
-                  width={1013}
-                  height={1244}
+                  src="/img/IMG_2387.PNG"
+                  alt="KUINA"
+                  width={704}
+                  height={732}
                   sizes="(max-width: 768px) 90vw, 45vw"
-                  style={{ width: "100%", height: "auto", display: "block", filter: "brightness(0.9) contrast(1.1) saturate(1.05)" }}
+                  style={{ width: "100%", height: "auto", display: "block", filter: "brightness(0.85) contrast(1.25) saturate(0.75)" }}
                 />
                 <div aria-hidden className="scanlines" />
-                <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(180deg, transparent 60%, rgba(0,8,20,0.6) 100%)" }} />
+                {/* duotone blue wash */}
+                <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(135deg, rgba(10,47,160,0.18) 0%, transparent 50%, rgba(51,85,221,0.1) 100%)", mixBlendMode: "color" as const }} />
+                <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(180deg, transparent 50%, rgba(0,6,14,0.7) 100%)" }} />
               </div>
             </div>
           </Reveal>
@@ -541,13 +599,20 @@ export default function KuinaPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mt-8">
               {DISCOGRAPHY.map((item) => (
                 <motion.a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer"
-                  className="relative overflow-hidden block focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
+                  className="group relative overflow-hidden block focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
                   style={{ aspectRatio: "1", cursor: "none" }}
                   whileHover={{ y: -4 }} transition={{ duration: 0.35, ease: [0.23,1,0.32,1] }}
                   initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-20px" }}
                 >
-                  <Image src={item.img} alt={item.alt} fill sizes="(max-width: 768px) 45vw, 25vw" style={{ objectFit: "cover", objectPosition: "center", filter: "brightness(0.9) contrast(1.1)" }} />
+                  <Image src={item.img} alt={item.alt} fill sizes="(max-width: 768px) 45vw, 25vw" style={{ objectFit: "cover", objectPosition: "center", filter: "brightness(0.88) contrast(1.15)" }} />
                   <div aria-hidden className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 45%, rgba(0,8,20,0.95))" }} />
+                  {/* selection-box corners — lenguaje Solo Estoy Jugando */}
+                  <div aria-hidden className="absolute inset-0 pointer-events-none z-[3] opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                    <span className="absolute top-2 left-2 block w-5 h-5 border-t border-l border-celeste" />
+                    <span className="absolute top-2 right-2 block w-5 h-5 border-t border-r border-celeste" />
+                    <span className="absolute bottom-2 left-2 block w-5 h-5 border-b border-l border-celeste" />
+                    <span className="absolute bottom-2 right-2 block w-5 h-5 border-b border-r border-celeste" />
+                  </div>
                   <div className="absolute z-[2] bottom-3 left-3 right-3">
                     <div className="font-mono text-celeste uppercase" style={{ fontSize: "0.5rem", letterSpacing: "0.25em", marginBottom: 3 }}>{item.type} · {item.year}</div>
                     <div className="font-display text-white leading-tight" style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)" }}>{item.title}</div>
@@ -660,9 +725,10 @@ export default function KuinaPage() {
                   <Image
                     src={item.src} alt={item.alt} fill loading="eager"
                     sizes="(max-width: 768px) 50vw, 25vw"
-                    style={{ objectFit: "cover", objectPosition: "center" }}
+                    style={{ objectFit: "cover", objectPosition: "center top", filter: "brightness(0.88) contrast(1.18) saturate(0.9)" }}
                   />
-                  <div aria-hidden className="absolute inset-0 pointer-events-none z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(0,8,20,0.5))" }} />
+                  <div aria-hidden className="scanlines" style={{ opacity: 0.5 }} />
+                  <div aria-hidden className="absolute inset-0 pointer-events-none z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(0,8,20,0.6))" }} />
                 </motion.button>
               );
             })}
