@@ -9,20 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        void: "#000814",
-        deep: "#001027",
-        navy: "#001D3D",
-        royal: "#003566",
-        "kuina-blue": "#0466C8",
-        electric: "#00B4D8",
-        celeste: "#48CAE4",
-        frost: "#90E0EF",
+        void: "#00060E",
+        deep: "#000B1E",
+        navy: "#001230",
+        royal: "#002460",
+        "kuina-blue": "#0A2FA0",
+        electric: "#3355DD",
+        celeste: "#4D6EF5",
+        frost: "#EDE5CE",
         blood: "#9B0014",
+        mustard: "#8B7020",
       },
       fontFamily: {
-        display: ["var(--font-pirata)", "serif"],
-        serif: ["var(--font-cormorant)", "serif"],
-        mono: ["var(--font-jetbrains)", "monospace"],
+        display: ["var(--font-anton)", "sans-serif"],
+        seal:    ["var(--font-pirata)", "serif"],
+        serif:   ["var(--font-cormorant)", "serif"],
+        mono:    ["var(--font-jetbrains)", "monospace"],
       },
       keyframes: {
         cursorPulse: {

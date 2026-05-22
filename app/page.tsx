@@ -11,6 +11,9 @@ interface DiscoItem {
 interface GalleryItem {
   src: string; alt: string; featured?: boolean;
 }
+interface TourItem {
+  day: string; month: string; city: string; href: string | null; out?: boolean;
+}
 
 /* ─── Data ───────────────────────────────────────────────── */
 const DISCOGRAPHY: DiscoItem[] = [
@@ -28,6 +31,17 @@ const GALLERY: GalleryItem[] = [
   { src: "/img/Castillo5.PNG", alt: "KUINA castillo 5" },
   { src: "/img/Castillo6.PNG", alt: "KUINA castillo 6" },
   { src: "/img/Castillo7.PNG", alt: "KUINA castillo 7" },
+];
+
+const TOUR: TourItem[] = [
+  { day: "17", month: "MAYO",  city: "Santiago",     href: null,    out: true  },
+  { day: "05", month: "JUNIO", city: "Talca",         href: "https://www.ecopass.cl/events/kuina---por-siempre-tour---talca---viernes-05-junio/17974" },
+  { day: "06", month: "JUNIO", city: "Koncepción",    href: "https://primeticket.cl/details/por-siempre-tour-en-concepcion" },
+  { day: "12", month: "JUNIO", city: "Temuko",        href: "https://www.passline.com/eventos/temuko-por-siempre-tour-kuina" },
+  { day: "13", month: "JUNIO", city: "Valdivia",      href: "https://portaldisc.com/evento/kuina-tour-2026-valdivia" },
+  { day: "14", month: "JUNIO", city: "Puerto Montt",  href: "https://www.passline.com/eventos/puerto-montt-por-siempre-tour-kuina" },
+  { day: "26", month: "JUNIO", city: "La Serena",     href: "https://www.passline.com/eventos/la-serena-por-siempre-tour-kuina" },
+  { day: "28", month: "JUNIO", city: "Valparaíso",    href: "https://www.passline.com/eventos/valparaiso-por-siempre-tour-kuina" },
 ];
 
 /* per-image scatter layout — rotate + vertical stagger */
@@ -49,9 +63,9 @@ const CASTLE_HERO =
 
 /* ─── Rabbit SVG ─────────────────────────────────────────── */
 function RabbitSvg({ blood = false }: { blood?: boolean }) {
-  const s = blood ? "#9B0014" : "#48CAE4";
-  const f = blood ? "#000814" : "#001D3D";
-  const e = blood ? "#9B0014" : "#48CAE4";
+  const s = blood ? "#9B0014" : "#4D6EF5";
+  const f = blood ? "#00060E" : "#001230";
+  const e = blood ? "#9B0014" : "#4D6EF5";
   return (
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <ellipse cx="50" cy="70" rx="22" ry="18" fill={f} stroke={s} strokeWidth="0.5" opacity="0.8" />
@@ -74,9 +88,9 @@ function Reveal({ children, className = "", style, delay = 0 }: {
   return (
     <motion.div
       ref={ref} className={className} style={style}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 48 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1], delay }}
+      transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1], delay }}
     >
       {children}
     </motion.div>
@@ -142,7 +156,7 @@ function Cursor() {
         className="fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-screen transition-[width,height] duration-200"
         style={{ width: big ? 40 : 20, height: big ? 40 : 20 }}
       >
-        <span className="absolute inset-0 flex items-center justify-center" style={{ color: "#48CAE4", fontSize: 18, animation: "cursorPulse 2s ease-in-out infinite", textShadow: "0 0 8px #00B4D8, 0 0 16px #0466C8" }}>✦</span>
+        <span className="absolute inset-0 flex items-center justify-center" style={{ color: "#4D6EF5", fontSize: 18, animation: "cursorPulse 2s ease-in-out infinite", textShadow: "0 0 8px #3355DD, 0 0 16px #0A2FA0" }}>✦</span>
       </div>
       {Array.from({ length: 8 }, (_, i) => (
         <div
@@ -150,7 +164,7 @@ function Cursor() {
           ref={el => { if (el) trailsRef.current[i] = el; }}
           aria-hidden
           className="fixed w-1 h-1 bg-celeste rounded-full pointer-events-none z-[9998]"
-          style={{ opacity: (1 - i / 8) * 0.4, boxShadow: "0 0 10px #00B4D8", transform: `translate(-50%, -50%) scale(${1 - (i / 8) * 0.8})` }}
+          style={{ opacity: (1 - i / 8) * 0.4, boxShadow: "0 0 10px #3355DD", transform: `translate(-50%, -50%) scale(${1 - (i / 8) * 0.8})` }}
         />
       ))}
     </>
@@ -177,7 +191,7 @@ function Particles() {
     <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden" aria-hidden>
       {items.map(p => (
         <div key={p.id} className="absolute rounded-full bg-frost opacity-0"
-          style={{ left: p.left + "vw", width: p.size + "px", height: p.size + "px", boxShadow: "0 0 6px #48CAE4", animation: `float ${p.duration}s linear ${p.delay}s infinite` }}
+          style={{ left: p.left + "vw", width: p.size + "px", height: p.size + "px", boxShadow: "0 0 6px #4D6EF5", animation: `float ${p.duration}s linear ${p.delay}s infinite` }}
         />
       ))}
     </div>
@@ -266,7 +280,7 @@ function AudioToggle() {
             <span key={i} className="block w-[2px] bg-celeste rounded-[1px]" style={{ height: 3, animation: playing ? `wave 0.9s ease-in-out ${i * 0.15}s infinite` : undefined }} />
           ))}
         </span>
-        <span className="hidden sm:inline">{label}</span>
+        <span>{label}</span>
       </button>
     </div>
   );
@@ -287,20 +301,20 @@ function CornerRabbit() {
     <button
       onClick={handleClick} onMouseEnter={() => setRed(true)} onMouseLeave={() => setRed(false)}
       className="fixed bottom-4 right-4 z-[60] opacity-40 hover:opacity-100 transition-opacity duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
-      style={{ width: 60, height: 60 }} aria-label="Easter egg" title="hi."
+      style={{ width: 80, height: 80 }} aria-label="Easter egg" title="hi."
     >
       <motion.div animate={spin ? { rotate: 360, scale: 1.3 } : { rotate: 0, scale: 1 }} transition={{ duration: 1, ease: "easeInOut" }} style={{ width: "100%", height: "100%" }}>
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-          <ellipse cx="50" cy="70" rx="24" ry="18" fill="#001D3D" stroke="#48CAE4" strokeWidth="0.6" />
-          <ellipse cx="50" cy="50" rx="17" ry="14" fill="#001D3D" stroke="#48CAE4" strokeWidth="0.6" />
-          <ellipse cx="40" cy="28" rx="5"  ry="18" fill="#001D3D" stroke="#48CAE4" strokeWidth="0.6" />
-          <ellipse cx="60" cy="28" rx="5"  ry="18" fill="#001D3D" stroke="#48CAE4" strokeWidth="0.6" />
-          <ellipse cx="40" cy="28" rx="2"  ry="12" fill="#0466C8" opacity="0.5" />
-          <ellipse cx="60" cy="28" rx="2"  ry="12" fill="#0466C8" opacity="0.5" />
-          <circle cx="44" cy="50" r="2" fill={red ? "#9B0014" : "#48CAE4"} style={{ transition: "fill 0.3s" }} />
-          <circle cx="56" cy="50" r="2" fill={red ? "#9B0014" : "#48CAE4"} style={{ transition: "fill 0.3s" }} />
-          <ellipse cx="50" cy="58" rx="1.5" ry="1" fill="#48CAE4" opacity="0.6" />
-          <path d="M 47 60 Q 50 63 53 60" stroke="#48CAE4" strokeWidth="0.5" fill="none" opacity="0.6" />
+          <ellipse cx="50" cy="70" rx="24" ry="18" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
+          <ellipse cx="50" cy="50" rx="17" ry="14" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
+          <ellipse cx="40" cy="28" rx="5"  ry="18" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
+          <ellipse cx="60" cy="28" rx="5"  ry="18" fill="#001230" stroke="#4D6EF5" strokeWidth="0.6" />
+          <ellipse cx="40" cy="28" rx="2"  ry="12" fill="#0A2FA0" opacity="0.5" />
+          <ellipse cx="60" cy="28" rx="2"  ry="12" fill="#0A2FA0" opacity="0.5" />
+          <circle cx="44" cy="50" r="2" fill={red ? "#9B0014" : "#4D6EF5"} style={{ transition: "fill 0.3s" }} />
+          <circle cx="56" cy="50" r="2" fill={red ? "#9B0014" : "#4D6EF5"} style={{ transition: "fill 0.3s" }} />
+          <ellipse cx="50" cy="58" rx="1.5" ry="1" fill="#4D6EF5" opacity="0.6" />
+          <path d="M 47 60 Q 50 63 53 60" stroke="#4D6EF5" strokeWidth="0.5" fill="none" opacity="0.6" />
         </svg>
       </motion.div>
     </button>
@@ -326,7 +340,7 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
         transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }} onClick={e => e.stopPropagation()}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt} className="max-w-[90vw] max-h-[85vh] object-contain" style={{ boxShadow: "0 30px 100px rgba(4,102,200,0.4)" }} />
+        <img src={src} alt={alt} className="max-w-[90vw] max-h-[85vh] object-contain" style={{ boxShadow: "0 30px 100px rgba(10,47,160,0.4)" }} />
       </motion.div>
       <button onClick={onClose} className="absolute top-4 right-4 border border-celeste text-white w-11 h-11 font-mono text-base transition-all duration-300 hover:bg-celeste hover:text-void focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste" aria-label="Cerrar imagen">✕</button>
     </motion.div>
@@ -337,9 +351,9 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
 function SectionLabel({ children, center = false }: { children: string; center?: boolean }) {
   return (
     <div className={`font-mono text-celeste flex items-center gap-4 ${center ? "justify-center" : ""}`} style={{ fontSize: "0.7rem", letterSpacing: "0.5em" }}>
-      <span className="block shrink-0" style={{ width: 40, height: 1, background: "#48CAE4" }} />
+      <span className="block shrink-0" style={{ width: 40, height: 1, background: "#4D6EF5" }} />
       {children}
-      {center && <span className="block shrink-0" style={{ width: 40, height: 1, background: "#48CAE4" }} />}
+      {center && <span className="block shrink-0" style={{ width: 40, height: 1, background: "#4D6EF5" }} />}
     </div>
   );
 }
@@ -369,7 +383,7 @@ export default function KuinaPage() {
       </div>
 
       {/* Atmospheric BG */}
-      <div aria-hidden className="fixed inset-0 z-[-2]" style={{ background: "radial-gradient(ellipse at 20% 30%, rgba(4,102,200,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(0,53,102,0.2) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(0,29,61,0.4) 0%, #000814 80%)" }} />
+      <div aria-hidden className="fixed inset-0 z-[-2]" style={{ background: "radial-gradient(ellipse at 20% 30%, rgba(10,47,160,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(0,18,60,0.2) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(0,12,36,0.4) 0%, #00060E 80%)" }} />
       <div aria-hidden className="fixed inset-0 z-[-1] pointer-events-none opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />
 
       {/* ── Loader ── */}
@@ -378,10 +392,10 @@ export default function KuinaPage() {
           <motion.div key="loader" exit={{ opacity: 0 }} transition={{ duration: 1.2 }} className="fixed inset-0 bg-void z-[10000] flex flex-col items-center justify-center" aria-label="Cargando" role="status">
             <svg viewBox="0 0 200 200" className="w-36 h-36 mb-8" preserveAspectRatio="xMidYMid meet" aria-hidden>
               <g transform="translate(0,10)">
-                <path d={CASTLE_LOADER} fill="none" stroke="#48CAE4" strokeWidth="1.2" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: "drawCastle 2.5s ease forwards", filter: "drop-shadow(0 0 8px #00B4D8)" }} />
+                <path d={CASTLE_LOADER} fill="none" stroke="#4D6EF5" strokeWidth="1.2" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: "drawCastle 2.5s ease forwards", filter: "drop-shadow(0 0 8px #3355DD)" }} />
               </g>
             </svg>
-            <p className="font-display text-4xl text-white opacity-0" style={{ letterSpacing: "0.4em", paddingLeft: "0.4em", animation: "fadeInName 1s ease 1.8s forwards", textShadow: "0 0 20px #0466C8" }}>
+            <p className="font-display text-4xl text-white opacity-0" style={{ letterSpacing: "0.4em", paddingLeft: "0.4em", animation: "fadeInName 1s ease 1.8s forwards", textShadow: "0 0 20px #0A2FA0" }}>
               KUINA
             </p>
           </motion.div>
@@ -406,17 +420,18 @@ export default function KuinaPage() {
 
       {/* ═══ HERO ═══ */}
       <section id="hero" className="relative flex flex-col items-center justify-center overflow-hidden min-h-screen px-6">
+        <div aria-hidden className="absolute inset-0 pointer-events-none z-[-1]" style={{ background: "linear-gradient(180deg, #00060E 0%, rgba(10,47,160,0.14) 45%, rgba(0,18,48,0.2) 70%, #00060E 100%)" }} />
         <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: 0.18 }}>
-          <svg viewBox="0 0 400 300" className="w-[90%] max-w-[900px]" style={{ filter: "drop-shadow(0 0 30px #0466C8)" }}>
-            <path d={CASTLE_HERO} fill="none" stroke="#48CAE4" strokeWidth="0.8" />
+          <svg viewBox="0 0 400 300" className="w-[90%] max-w-[900px]" style={{ filter: "drop-shadow(0 0 30px #0A2FA0)" }}>
+            <path d={CASTLE_HERO} fill="none" stroke="#4D6EF5" strokeWidth="0.8" />
           </svg>
         </div>
 
         <div className="relative z-10 text-center px-4">
-          <p className="font-mono text-celeste mb-6 opacity-0" style={{ fontSize: "0.65rem", letterSpacing: "0.45em", animation: "heroFadeIn 1.2s ease 0.3s forwards" }}>
+          <p className="font-mono mb-6 opacity-0" style={{ fontSize: "0.65rem", letterSpacing: "0.45em", color: "#8B7020", animation: "heroFadeIn 1.2s ease 0.3s forwards" }}>
             POR SIEMPRE TOUR · MMXXVI
           </p>
-          <h1 className="font-display leading-none text-white opacity-0" style={{ fontSize: "clamp(4.5rem, 18vw, 14rem)", letterSpacing: "0.05em", textShadow: "0 0 40px #0466C8, 0 0 80px #003566", animation: "heroFadeIn 1.5s ease 0.6s forwards" }}>
+          <h1 className="font-display leading-none text-white opacity-0" style={{ fontSize: "clamp(4.5rem, 18vw, 14rem)", letterSpacing: "0.05em", textShadow: "0 0 40px #0A2FA0, 0 0 80px #003566", animation: "heroFadeIn 1.5s ease 0.6s forwards" }}>
             <span className="relative inline-block">
               KUINA
               <span aria-hidden className="absolute inset-0 text-electric" style={{ animation: "glitch-1 4s infinite", zIndex: -1 }}>KUINA</span>
@@ -429,7 +444,7 @@ export default function KuinaPage() {
         </div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-0 font-mono text-white/60" style={{ fontSize: "0.6rem", letterSpacing: "0.4em", animation: "heroFadeIn 1s ease 2s forwards" }}>
-          <div style={{ width: 1, height: 60, background: "linear-gradient(to bottom, transparent, #48CAE4)", animation: "scrollPulse 2s ease-in-out infinite" }} />
+          <div style={{ width: 1, height: 60, background: "linear-gradient(to bottom, transparent, #4D6EF5)", animation: "scrollPulse 2s ease-in-out infinite" }} />
           <span className="hidden sm:block">desliza · ↓ · descubre</span>
           <span className="sm:hidden">↓</span>
         </div>
@@ -440,11 +455,12 @@ export default function KuinaPage() {
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
           <Reveal>
             {/* mat frame — dark padding + celeste border + glow + tilt */}
-            <div style={{
+            <div className="grain" style={{
+              position: "relative",
               padding: "7px",
-              background: "#000814",
-              border: "1px solid rgba(72,202,228,0.5)",
-              boxShadow: "0 0 0 8px rgba(72,202,228,0.04), 0 0 50px rgba(4,102,200,0.4), 0 30px 80px rgba(0,0,0,0.7)",
+              background: "#00060E",
+              border: "1px solid rgba(77,110,245,0.5)",
+              boxShadow: "0 0 0 8px rgba(77,110,245,0.04), 0 0 50px rgba(10,47,160,0.4), 0 30px 80px rgba(0,0,0,0.7)",
               transform: "rotate(-1.5deg)",
             }}>
               <div style={{ position: "relative", overflow: "hidden" }}>
@@ -464,7 +480,7 @@ export default function KuinaPage() {
 
           <Reveal delay={0.12} className="md:pr-6">
             <SectionLabel>ACTO I</SectionLabel>
-            <h2 className="font-display leading-none text-white mt-4 mb-8 md:mb-12" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(4,102,200,0.5)" }}>
+            <h2 className="font-display leading-none text-white mt-4 mb-8 md:mb-12" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(10,47,160,0.5)" }}>
               la <em className="font-serif italic font-light text-frost" style={{ textShadow: "none" }}>koneja</em><br />azul
             </h2>
             <p className="font-serif italic font-light text-frost mb-5" style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)", lineHeight: 1.7 }}>
@@ -474,9 +490,9 @@ export default function KuinaPage() {
               Leonora Tonini Cáceres dejó Lautaro a los 18 con un sueño y un nombre artístico que aún no terminaba de pronunciar. Hoy, bajo la tiara que jamás se quita, construye un castillo donde guarda lo que la lastima y lo que la salva.
             </p>
             <p className="font-serif font-light" style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)", lineHeight: 1.7, color: "rgba(255,255,255,0.85)" }}>
-              Su música se mueve entre el <span style={{ color: "#48CAE4" }}>trap, el pop alternativo</span> y la balada herida.
+              Su música se mueve entre el <span style={{ color: "#4D6EF5" }}>trap, el pop alternativo</span> y la balada herida.
             </p>
-            <div className="grid grid-cols-3 gap-4 mt-8 pt-6" style={{ borderTop: "1px solid rgba(72,202,228,0.15)" }}>
+            <div className="grid grid-cols-3 gap-4 mt-8 pt-6" style={{ borderTop: "1px solid rgba(77,110,245,0.15)" }}>
               {[["+200K","oyentes / mes"],["93K","seguidores IG"],["2025","álbum debut"]].map(([num, label]) => (
                 <div key={label}>
                   <span className="font-display block leading-none text-electric" style={{ fontSize: "clamp(1.4rem, 4vw, 2rem)" }}>{num}</span>
@@ -489,11 +505,11 @@ export default function KuinaPage() {
       </section>
 
       {/* ═══ MUSIC ═══ */}
-      <section id="music" className="px-5 py-20 md:px-12 md:py-[120px]" style={{ minHeight: "100vh", background: "linear-gradient(180deg, transparent 0%, rgba(0,29,61,0.4) 50%, transparent 100%)" }}>
+      <section id="music" className="px-5 py-20 md:px-12 md:py-[120px]" style={{ minHeight: "100vh", background: "linear-gradient(180deg, transparent 0%, rgba(0,4,12,0.85) 50%, transparent 100%)" }}>
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="mb-2"><SectionLabel>ACTO II</SectionLabel></Reveal>
           <Reveal className="mb-10 md:mb-16">
-            <h2 className="font-display leading-none text-white mt-3" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(4,102,200,0.5)" }}>
+            <h2 className="font-display leading-none text-white mt-3" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(10,47,160,0.5)" }}>
               la <em className="font-serif italic font-light text-frost" style={{ textShadow: "none" }}>música</em>
             </h2>
           </Reveal>
@@ -501,9 +517,9 @@ export default function KuinaPage() {
           {/* Featured — kontando el tiempo */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
             <Reveal>
-              <a href="https://open.spotify.com/track/2bPLhS4VFelCuHPSxVPR1Y?si=_SiIM81xRUqExMXVtKJHqw" target="_blank" rel="noopener noreferrer" className="relative block overflow-hidden group focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste" style={{ aspectRatio: "1", boxShadow: "0 20px 60px rgba(4,102,200,0.3)" }}>
+              <a href="https://open.spotify.com/track/2bPLhS4VFelCuHPSxVPR1Y?si=_SiIM81xRUqExMXVtKJHqw" target="_blank" rel="noopener noreferrer" className="relative block overflow-hidden group focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste" style={{ aspectRatio: "1", boxShadow: "0 20px 60px rgba(10,47,160,0.3)" }}>
                 <Image src="/img/kontando-el-tiempo.jpg" alt="kontando el tiempo" fill sizes="(max-width: 768px) 90vw, 50vw" style={{ objectFit: "cover", objectPosition: "center", transition: "transform 0.7s ease" }} className="group-hover:scale-[1.03]" />
-                <div aria-hidden className="absolute inset-0 pointer-events-none z-[1]" style={{ background: "linear-gradient(135deg, transparent 60%, rgba(4,102,200,0.2))" }} />
+                <div aria-hidden className="absolute inset-0 pointer-events-none z-[1]" style={{ background: "linear-gradient(135deg, transparent 60%, rgba(10,47,160,0.2))" }} />
                 <div aria-hidden className="scanlines" />
               </a>
             </Reveal>
@@ -512,9 +528,9 @@ export default function KuinaPage() {
               <h3 className="font-display leading-none text-white mb-3" style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "0.02em" }}>kontando el tiempo</h3>
               <p className="font-mono mb-5 text-celeste/70 uppercase" style={{ fontSize: "0.6rem", letterSpacing: "0.2em" }}>KUINA ° Young Cister ° Ovyze</p>
               <p className="font-serif italic font-light text-white/70 mb-8" style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)", lineHeight: 1.6, maxWidth: 480 }}>El tiempo pasa. Las cuentas también.</p>
-              <a href="https://open.spotify.com/track/2bPLhS4VFelCuHPSxVPR1Y?si=_SiIM81xRUqExMXVtKJHqw" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 font-mono uppercase transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste" style={{ fontSize: "0.7rem", letterSpacing: "0.3em", padding: "14px 28px", background: "#48CAE4", color: "#000814", border: "1px solid #48CAE4" }}
+              <a href="https://open.spotify.com/track/2bPLhS4VFelCuHPSxVPR1Y?si=_SiIM81xRUqExMXVtKJHqw" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 font-mono uppercase transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste" style={{ fontSize: "0.7rem", letterSpacing: "0.3em", padding: "14px 28px", background: "#4D6EF5", color: "#00060E", border: "1px solid #4D6EF5" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background="#fff"; (e.currentTarget as HTMLElement).style.borderColor="#fff"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background="#48CAE4"; (e.currentTarget as HTMLElement).style.borderColor="#48CAE4"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background="#4D6EF5"; (e.currentTarget as HTMLElement).style.borderColor="#4D6EF5"; }}
               >ESCUCHAR <span aria-hidden>→</span></a>
             </Reveal>
           </div>
@@ -545,51 +561,60 @@ export default function KuinaPage() {
 
       {/* ═══ TOUR ═══ */}
       <section id="tour" className="relative px-5 py-20 md:px-12 md:py-[120px]" style={{ minHeight: "100vh" }}>
-        <div aria-hidden className="absolute inset-0 z-[-1]" style={{ backgroundImage: "url('/img/silhouette.jpeg')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.07 }} />
-        <div aria-hidden className="absolute hidden lg:block" style={{ right: -100, top: "50%", transform: "translateY(-50%)", width: 400, height: 400, opacity: 0.06, filter: "drop-shadow(0 0 40px #0466C8)" }}>
+        <div aria-hidden className="absolute inset-0 z-[-1]" style={{ backgroundImage: "url('/img/silhouette.jpeg')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.04 }} />
+        <div aria-hidden className="absolute hidden lg:block" style={{ right: -100, top: "50%", transform: "translateY(-50%)", width: 400, height: 400, opacity: 0.06, filter: "drop-shadow(0 0 40px #0A2FA0)" }}>
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="50" cy="70" rx="24" ry="18" fill="none" stroke="#48CAE4" strokeWidth="0.4" />
-            <ellipse cx="50" cy="50" rx="17" ry="14" fill="none" stroke="#48CAE4" strokeWidth="0.4" />
-            <ellipse cx="40" cy="28" rx="5" ry="18"  fill="none" stroke="#48CAE4" strokeWidth="0.4" />
-            <ellipse cx="60" cy="28" rx="5" ry="18"  fill="none" stroke="#48CAE4" strokeWidth="0.4" />
-            <circle cx="44" cy="50" r="2" fill="#48CAE4" /><circle cx="56" cy="50" r="2" fill="#48CAE4" />
+            <ellipse cx="50" cy="70" rx="24" ry="18" fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+            <ellipse cx="50" cy="50" rx="17" ry="14" fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+            <ellipse cx="40" cy="28" rx="5" ry="18"  fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+            <ellipse cx="60" cy="28" rx="5" ry="18"  fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+            <circle cx="44" cy="50" r="2" fill="#4D6EF5" /><circle cx="56" cy="50" r="2" fill="#4D6EF5" />
           </svg>
         </div>
 
         <Reveal className="text-center mb-12 md:mb-20">
           <SectionLabel center>ACTO III</SectionLabel>
-          <h2 className="font-display leading-none text-white mt-4 mb-5" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(4,102,200,0.5)" }}>
+          <h2 className="font-display leading-none text-white mt-4 mb-5" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(10,47,160,0.4)" }}>
             por <em className="font-serif italic font-light text-frost" style={{ textShadow: "none" }}>siempre</em> tour
           </h2>
           <p className="font-serif italic font-light text-frost mx-auto" style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)", maxWidth: 560 }}>
-            Tres noches. Tres ciudades. Un castillo que se desarma y se vuelve a armar en cada escenario.
+            Ocho fechas. Chile entero. Un castillo que se desarma y se vuelve a armar en cada escenario.
           </p>
         </Reveal>
 
         <div className="max-w-[900px] mx-auto flex flex-col gap-[2px]">
-          {[
-            { day: "17", month: "MAYO",  city: "Santiago",  venue: "venue · por confirmar" },
-            { day: "05", month: "JUNIO", city: "Talca",      venue: "venue · por confirmar" },
-            { day: "06", month: "JUNIO", city: "Koncepción", venue: "venue · por confirmar" },
-          ].map(({ day, month, city, venue }, i) => (
-            <Reveal key={city} delay={i * 0.08}>
-              <motion.a href="#"
-                className="relative overflow-hidden flex items-center gap-4 md:gap-10 text-white no-underline w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
-                style={{ display: "grid", gridTemplateColumns: "64px 1fr auto", gap: "16px", alignItems: "center", padding: "20px 16px", background: "rgba(0,29,61,0.3)", border: "1px solid rgba(72,202,228,0.1)" }}
-                whileHover={{ x: 4, backgroundColor: "rgba(4,102,200,0.15)", borderColor: "rgba(72,202,228,1)" }}
+          {TOUR.map(({ day, month, city, href, out }, i) => (
+            <Reveal key={city} delay={i * 0.06}>
+              <motion.a
+                href={out ? undefined : href ?? undefined}
+                target={out ? undefined : "_blank"}
+                rel={out ? undefined : "noopener noreferrer"}
+                className="relative overflow-hidden text-white no-underline w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
+                style={{
+                  display: "grid", gridTemplateColumns: "64px 1fr auto", gap: "16px", alignItems: "center",
+                  padding: "20px 16px",
+                  background: out ? "rgba(20,0,0,0.5)" : "rgba(0,4,12,0.7)",
+                  border: `1px solid ${out ? "rgba(155,0,20,0.25)" : "rgba(77,110,245,0.08)"}`,
+                  cursor: out ? "default" : "pointer",
+                  opacity: out ? 0.6 : 1,
+                }}
+                whileHover={out ? {} : { x: 4, backgroundColor: "rgba(10,47,160,0.12)", borderColor: "rgba(77,110,245,0.8)" }}
                 transition={{ duration: 0.25, ease: [0.23,1,0.32,1] }}
               >
-                <motion.span aria-hidden className="absolute left-0 top-0 bottom-0 bg-celeste origin-top" style={{ width: 3 }} initial={{ scaleY: 0 }} whileHover={{ scaleY: 1 }} transition={{ duration: 0.25 }} />
+                {!out && <motion.span aria-hidden className="absolute left-0 top-0 bottom-0 bg-celeste origin-top" style={{ width: 2 }} initial={{ scaleY: 0 }} whileHover={{ scaleY: 1 }} transition={{ duration: 0.25 }} />}
                 <div>
-                  <div className="font-display leading-none text-electric" style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }}>{day}</div>
-                  <div className="font-mono uppercase text-frost" style={{ fontSize: "0.6rem", letterSpacing: "0.3em", marginTop: 3 }}>{month}</div>
+                  <div className="font-display leading-none" style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)", color: out ? "#9B0014" : "#3355DD" }}>{day}</div>
+                  <div className="font-mono uppercase" style={{ fontSize: "0.6rem", letterSpacing: "0.3em", marginTop: 3, color: out ? "rgba(155,0,20,0.7)" : "#EDE5CE" }}>{month}</div>
                 </div>
                 <div>
-                  <div className="font-display uppercase" style={{ fontSize: "clamp(1.1rem, 3.5vw, 2rem)", letterSpacing: "0.08em" }}>{city}</div>
-                  <div className="font-mono uppercase text-white/40 hidden sm:block" style={{ fontSize: "0.6rem", letterSpacing: "0.15em", marginTop: 2 }}>{venue}</div>
+                  <div className="font-display uppercase" style={{ fontSize: "clamp(1.1rem, 3.5vw, 2rem)", letterSpacing: "0.08em", textDecoration: out ? "line-through" : "none", textDecorationColor: "#9B0014" }}>{city}</div>
                 </div>
-                <div className="font-mono uppercase text-celeste border border-celeste shrink-0" style={{ fontSize: "0.55rem", letterSpacing: "0.25em", padding: "6px 10px" }}>
-                  ENTRADAS →
+                <div className="font-mono uppercase shrink-0 text-center" style={{
+                  fontSize: "0.5rem", letterSpacing: "0.2em", padding: "6px 10px",
+                  color: out ? "#9B0014" : "#4D6EF5",
+                  border: `1px solid ${out ? "rgba(155,0,20,0.4)" : "rgba(77,110,245,0.5)"}`,
+                }}>
+                  {out ? "PASADO" : "ENTRADAS"}
                 </div>
               </motion.a>
             </Reveal>
@@ -602,7 +627,7 @@ export default function KuinaPage() {
         <div className="max-w-[1400px] mx-auto">
           <Reveal><SectionLabel>ACTO IV</SectionLabel></Reveal>
           <Reveal>
-            <h2 className="font-display leading-none text-white mt-3 mb-8 md:mb-12" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(4,102,200,0.5)" }}>
+            <h2 className="font-display leading-none text-white mt-3 mb-8 md:mb-12" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(10,47,160,0.5)" }}>
               archivo <em className="font-serif italic font-light text-frost" style={{ textShadow: "none" }}>azul</em>
             </h2>
           </Reveal>
@@ -615,17 +640,17 @@ export default function KuinaPage() {
                 <motion.button
                   key={item.src}
                   onClick={() => setLightbox({ src: item.src, alt: item.alt })}
-                  className="group focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
+                  className="grain group focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
                   style={{
                     position: "relative", overflow: "hidden", display: "block", border: "none",
-                    cursor: "none", background: "#000814",
+                    cursor: "none", background: "#00060E",
                     aspectRatio: m.aspect,
                     marginTop: i >= 2 ? m.mt : 0, // stagger only from row 2 on mobile
                     transform: `rotate(${m.rotate}deg)`,
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(72,202,228,0.08)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(77,110,245,0.08)",
                     transition: "transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease",
                   }}
-                  whileHover={{ rotate: 0, scale: 1.03, boxShadow: "0 20px 60px rgba(4,102,200,0.35), 0 0 0 1px rgba(72,202,228,0.3)" }}
+                  whileHover={{ rotate: 0, scale: 1.03, boxShadow: "0 20px 60px rgba(10,47,160,0.35), 0 0 0 1px rgba(77,110,245,0.3)" }}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-10px" }}
@@ -646,7 +671,7 @@ export default function KuinaPage() {
       </section>
 
       {/* ═══ CONTACT ═══ */}
-      <section id="contact" className="px-5 py-20 md:px-12 md:py-[120px] text-center" style={{ minHeight: "100vh", background: "linear-gradient(180deg, transparent, rgba(0,53,102,0.15))" }}>
+      <section id="contact" className="px-5 py-20 md:px-12 md:py-[120px] text-center" style={{ minHeight: "100vh", background: "linear-gradient(180deg, transparent, rgba(0,4,12,0.9))" }}>
         <Reveal>
           <SectionLabel center>ACTO V</SectionLabel>
           <h2 className="font-display leading-none text-white mt-4 mb-4" style={{ fontSize: "clamp(2.2rem, 7vw, 5rem)", letterSpacing: "0.05em" }}>
@@ -667,11 +692,11 @@ export default function KuinaPage() {
             ].map(({ platform, handle, href }) => (
               <motion.a key={platform} href={href} target="_blank" rel="noopener noreferrer"
                 className="relative overflow-hidden no-underline text-white block focus-visible:outline focus-visible:outline-2 focus-visible:outline-celeste"
-                style={{ padding: "24px 16px", border: "1px solid rgba(72,202,228,0.2)", background: "rgba(0,16,39,0.4)" }}
-                whileHover={{ y: -3, borderColor: "rgba(72,202,228,1)", backgroundColor: "rgba(4,102,200,0.1)" }}
+                style={{ padding: "24px 16px", border: "1px solid rgba(77,110,245,0.2)", background: "rgba(0,16,39,0.4)" }}
+                whileHover={{ y: -3, borderColor: "rgba(77,110,245,1)", backgroundColor: "rgba(10,47,160,0.1)" }}
                 transition={{ duration: 0.25, ease: [0.23,1,0.32,1] }}
               >
-                <motion.span aria-hidden className="absolute bottom-0 left-0 w-full" style={{ height: 2, background: "linear-gradient(90deg, transparent, #48CAE4, transparent)" }} initial={{ x: "-100%" }} whileHover={{ x: "100%" }} transition={{ duration: 0.55, ease: "easeInOut" }} />
+                <motion.span aria-hidden className="absolute bottom-0 left-0 w-full" style={{ height: 2, background: "linear-gradient(90deg, transparent, #4D6EF5, transparent)" }} initial={{ x: "-100%" }} whileHover={{ x: "100%" }} transition={{ duration: 0.55, ease: "easeInOut" }} />
                 <div className="font-mono text-celeste uppercase mb-2.5" style={{ fontSize: "0.6rem", letterSpacing: "0.35em" }}>{platform}</div>
                 <div className="font-display" style={{ fontSize: "clamp(0.85rem, 2vw, 1.1rem)", letterSpacing: "0.03em" }}>{handle}</div>
               </motion.a>
@@ -679,15 +704,15 @@ export default function KuinaPage() {
           </div>
         </Reveal>
 
-        <Reveal className="mt-14 pt-10" style={{ borderTop: "1px solid rgba(72,202,228,0.15)" }}>
+        <Reveal className="mt-14 pt-10" style={{ borderTop: "1px solid rgba(77,110,245,0.15)" }}>
           <p className="font-mono uppercase text-white/50" style={{ fontSize: "0.7rem", letterSpacing: "0.2em" }}>
-            BOOKING & PRENSA · <a href="mailto:booking@kuina.cl" className="text-celeste no-underline" style={{ borderBottom: "1px solid #48CAE4" }}>booking@kuina.cl</a>
+            BOOKING & PRENSA · <a href="mailto:booking@kuina.cl" className="text-celeste no-underline" style={{ borderBottom: "1px solid #4D6EF5" }}>booking@kuina.cl</a>
           </p>
         </Reveal>
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="text-center px-5 py-10" style={{ borderTop: "1px solid rgba(72,202,228,0.1)" }}>
+      <footer className="text-center px-5 py-10" style={{ borderTop: "1px solid rgba(77,110,245,0.1)" }}>
         <div className="font-display text-white" style={{ fontSize: "1.4rem", letterSpacing: "0.4em" }}>KUINA</div>
         <div className="font-serif italic text-frost mt-1">por siempre</div>
         <p className="font-mono uppercase text-white/30 mt-5" style={{ fontSize: "0.5rem", letterSpacing: "0.3em" }}>
