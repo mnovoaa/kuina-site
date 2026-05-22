@@ -364,6 +364,53 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
   );
 }
 
+/* ─── Seraphim wings — lo etéreo-celestial ──────────────── */
+function SeraphimWings({ opacity = 0.07, size = 400 }: { opacity?: number; size?: number }) {
+  return (
+    <svg viewBox="0 0 400 300" width={size} height={size * 0.75} aria-hidden style={{ opacity }}>
+      {/* 3 pares de alas — izquierda */}
+      <path d="M200,150 C170,100 110,90 60,60 C100,95 155,100 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.6" />
+      <path d="M200,150 C165,125 100,120 40,110 C85,120 150,125 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.5" />
+      <path d="M200,150 C175,140 130,142 80,145 C120,143 162,142 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+      <path d="M200,150 C170,165 120,180 65,200 C110,178 158,165 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.5" />
+      <path d="M200,150 C172,172 128,195 75,225 C115,192 162,170 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+      <path d="M200,150 C178,185 148,215 110,245 C142,210 175,182 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.3" />
+      {/* 3 pares de alas — derecha (espejo) */}
+      <path d="M200,150 C230,100 290,90 340,60 C300,95 245,100 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.6" />
+      <path d="M200,150 C235,125 300,120 360,110 C315,120 250,125 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.5" />
+      <path d="M200,150 C225,140 270,142 320,145 C280,143 238,142 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+      <path d="M200,150 C230,165 280,180 335,200 C290,178 242,165 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.5" />
+      <path d="M200,150 C228,172 272,195 325,225 C285,192 238,170 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.4" />
+      <path d="M200,150 C222,185 252,215 290,245 C258,210 225,182 200,150" fill="none" stroke="#4D6EF5" strokeWidth="0.3" />
+      {/* centro — cabeza del serafín */}
+      <circle cx="200" cy="148" r="6" fill="none" stroke="#4D6EF5" strokeWidth="0.5" />
+      <circle cx="200" cy="148" r="2" fill="#4D6EF5" opacity="0.4" />
+    </svg>
+  );
+}
+
+/* ─── Ghost Rabbit — el guardián que asoma en penumbra ───── */
+function GhostRabbit({ opacity = 0.045, size = 380 }: { opacity?: number; size?: number }) {
+  return (
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden
+      width={size} height={size} style={{ opacity, filter: "blur(0.4px)" }}>
+      <ellipse cx="50" cy="72" rx="28" ry="20" fill="none" stroke="#4D6EF5" strokeWidth="0.35" />
+      <ellipse cx="50" cy="50" rx="20" ry="17" fill="none" stroke="#4D6EF5" strokeWidth="0.35" />
+      <ellipse cx="40" cy="26" rx="6" ry="22" fill="none" stroke="#4D6EF5" strokeWidth="0.35" />
+      <ellipse cx="60" cy="26" rx="6" ry="22" fill="none" stroke="#4D6EF5" strokeWidth="0.35" />
+      <ellipse cx="40" cy="26" rx="2.5" ry="15" fill="#0A2FA0" opacity="0.3" />
+      <ellipse cx="60" cy="26" rx="2.5" ry="15" fill="#0A2FA0" opacity="0.3" />
+      <circle cx="43" cy="49" r="2" fill="#4D6EF5" opacity="0.6" />
+      <circle cx="57" cy="49" r="2" fill="#4D6EF5" opacity="0.6" />
+      <ellipse cx="50" cy="57" rx="1.5" ry="1" fill="#4D6EF5" opacity="0.4" />
+      {/* pentagrama — la versión satánica */}
+      <path d="M50,62 L54,75 L43,67 L57,67 L46,75 Z" fill="none" stroke="#3355DD" strokeWidth="0.4" opacity="0.5" />
+      {/* tiara */}
+      <path d="M38,35 L40,30 L44,34 L48,28 L50,33 L52,28 L56,34 L60,30 L62,35" fill="none" stroke="#8B7020" strokeWidth="0.4" opacity="0.6" />
+    </svg>
+  );
+}
+
 /* ─── Star sparkles — scattered hand-drawn glints ───────── */
 function StarField() {
   const stars = [
@@ -477,7 +524,19 @@ export default function KuinaPage() {
         <div aria-hidden className="absolute inset-0 pointer-events-none z-0" style={{ background: "linear-gradient(180deg, #00060E 0%, rgba(0,6,14,0.4) 40%, rgba(0,6,14,0.5) 70%, #00060E 100%)" }} />
         {/* brillos estelares */}
         <StarField />
-        <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none z-0" style={{ opacity: 0.12 }}>
+        {/* serafines — lo etéreo-celestial como marca de agua */}
+        <div aria-hidden className="absolute pointer-events-none z-0" style={{ top: "5%", left: "-8%", transform: "rotate(-15deg)" }}>
+          <SeraphimWings opacity={0.055} size={500} />
+        </div>
+        <div aria-hidden className="absolute pointer-events-none z-0" style={{ bottom: "8%", right: "-10%", transform: "rotate(12deg) scaleX(-1)" }}>
+          <SeraphimWings opacity={0.04} size={380} />
+        </div>
+        {/* el guardián — konejo como protagonista del mundo */}
+        <div aria-hidden className="absolute pointer-events-none z-0" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          <GhostRabbit opacity={0.04} size={420} />
+        </div>
+        {/* castillo SVG */}
+        <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none z-0" style={{ opacity: 0.1 }}>
           <svg viewBox="0 0 400 300" className="w-[90%] max-w-[900px]" style={{ filter: "drop-shadow(0 0 30px #0A2FA0)" }}>
             <path d={CASTLE_HERO} fill="none" stroke="#4D6EF5" strokeWidth="0.8" />
           </svg>
@@ -494,8 +553,13 @@ export default function KuinaPage() {
               <span aria-hidden className="absolute inset-0 text-blood"   style={{ animation: "glitch-2 4s infinite", zIndex: -1 }}>KUINA</span>
             </span>
           </h1>
-          <p className="font-serif italic font-light text-frost opacity-0 mt-5" style={{ fontSize: "clamp(1.3rem, 4vw, 2.5rem)", letterSpacing: "0.05em", animation: "heroFadeIn 1.5s ease 1.2s forwards" }}>
+          {/* voz caligráfica — el contrapunto frágil al grito */}
+          <p className="font-script opacity-0 mt-4" style={{ fontSize: "clamp(1.4rem, 4.5vw, 2.8rem)", color: "#EDE5CE", letterSpacing: "0.02em", animation: "heroFadeIn 1.5s ease 1.2s forwards" }}>
             por siempre
+          </p>
+          {/* sello siniestro — Pirata One, un solo momento */}
+          <p className="font-seal opacity-0 mt-3" style={{ fontSize: "clamp(0.7rem, 1.5vw, 1rem)", color: "rgba(77,110,245,0.5)", letterSpacing: "0.15em", animation: "heroFadeIn 1s ease 1.8s forwards" }}>
+            koneja · kastillo · medianoche
           </p>
         </div>
 
@@ -507,26 +571,29 @@ export default function KuinaPage() {
       </section>
 
       {/* ═══ ABOUT ═══ */}
-      <section id="about" className="px-5 py-20 md:px-12 md:py-[120px]" style={{ minHeight: "100vh" }}>
+      <section id="about" className="relative px-5 py-20 md:px-12 md:py-[120px]" style={{ minHeight: "100vh" }}>
+        <div aria-hidden className="absolute top-0 right-0 pointer-events-none overflow-hidden" style={{ opacity: 0.06 }}>
+          <SeraphimWings size={320} opacity={1} />
+        </div>
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
           <Reveal>
-            {/* mat frame — la koneja azul */}
+            {/* fanzine frame — borde de papel, recorte, tilt */}
             <div className="grain" style={{
               position: "relative",
-              padding: "7px",
+              padding: "5px 6px 14px 5px",
               background: "#00060E",
-              border: "1px solid rgba(77,110,245,0.45)",
-              boxShadow: "0 0 0 8px rgba(77,110,245,0.03), 0 0 60px rgba(10,47,160,0.5), 0 40px 100px rgba(0,0,0,0.8)",
+              boxShadow: "0 0 60px rgba(10,47,160,0.55), 0 40px 100px rgba(0,0,0,0.85), 3px 4px 0 rgba(77,110,245,0.12), -2px -3px 0 rgba(77,110,245,0.06)",
               transform: "rotate(-1.8deg)",
+              clipPath: "polygon(0% 0.8%, 1.2% 0%, 98.5% 0.3%, 100% 0%, 99.6% 98.8%, 100% 100%, 1.5% 99.5%, 0% 100%)",
             }}>
               <div style={{ position: "relative", overflow: "hidden" }}>
                 <Image
-                  src="/img/IMG_2387.PNG"
+                  src="/img/IMG_2397.PNG"
                   alt="KUINA"
-                  width={704}
-                  height={732}
+                  width={1125}
+                  height={1398}
                   sizes="(max-width: 768px) 90vw, 45vw"
-                  style={{ width: "100%", height: "auto", display: "block", filter: "brightness(0.85) contrast(1.25) saturate(0.75)" }}
+                  style={{ width: "100%", height: "auto", display: "block", filter: "brightness(1.05) contrast(1.1) saturate(1.1)" }}
                 />
                 <div aria-hidden className="scanlines" />
                 {/* duotone blue wash */}
@@ -541,7 +608,7 @@ export default function KuinaPage() {
             <h2 className="font-display leading-none text-white mt-4 mb-8 md:mb-12" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", textShadow: "0 0 30px rgba(10,47,160,0.5)" }}>
               la <em className="font-serif italic font-light text-frost" style={{ textShadow: "none" }}>koneja</em><br />azul
             </h2>
-            <p className="font-serif italic font-light text-frost mb-5" style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)", lineHeight: 1.7 }}>
+            <p className="font-script text-frost mb-5" style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.5 }}>
               Vino del sur. Cambió su pelo por el color del cielo a medianoche.
             </p>
             <p className="font-serif font-light mb-5" style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)", lineHeight: 1.7, color: "rgba(255,255,255,0.85)" }}>

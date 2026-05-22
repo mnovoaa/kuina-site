@@ -25,6 +25,7 @@ const config: Config = {
         seal:    ["var(--font-pirata)", "serif"],
         serif:   ["var(--font-cormorant)", "serif"],
         mono:    ["var(--font-jetbrains)", "monospace"],
+        script:  ["var(--font-dancing)", "cursive"],
       },
       keyframes: {
         cursorPulse: {

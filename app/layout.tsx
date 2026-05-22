@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Pirata_One, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
+import { Anton, Pirata_One, Cormorant_Garamond, JetBrains_Mono, Dancing_Script } from "next/font/google";
 import "./globals.css";
 
 const anton = Anton({
@@ -21,6 +21,13 @@ const cormorant = Cormorant_Garamond({
   style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-cormorant",
+  display: "swap",
+});
+
+const dancing = Dancing_Script({
+  weight: ["400", "600"],
+  subsets: ["latin"],
+  variable: "--font-dancing",
   display: "swap",
 });
 
@@ -61,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <body
-        className={`${anton.variable} ${pirata.variable} ${cormorant.variable} ${jetbrains.variable} bg-void text-white overflow-x-hidden`}
+        className={`${anton.variable} ${pirata.variable} ${cormorant.variable} ${jetbrains.variable} ${dancing.variable} bg-void text-white overflow-x-hidden`}
       >
         {children}
       </body>
