@@ -1,0 +1,22 @@
+# documentación interna del proyecto (no se despliega)
+DOCUMENTACION.md
+
+# assets de prueba no usados en el sitio
+assets/gemini-*
+
+# backups y temporales
+*.bak
+*.tmp
+*~
+.DS_Store
+Thumbs.db
+
+# entornos / IDE
+.claude/
+.vscode/
+.idea/
+memory/
+
+# logs y deps que no usamos
+node_modules/
+*.log
