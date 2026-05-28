@@ -59,6 +59,12 @@ nav.scrolled{background:rgba(233,231,223,.82);backdrop-filter:blur(10px);padding
 .back:focus,.pager a:focus{outline:none}
 .back:focus-visible,.pager a:focus-visible{outline:1px dotted var(--ink);outline-offset:6px;border-radius:2px}
 @media(max-width:760px){nav{padding:20px 22px} .nav-logo{display:none} .wrap{padding:150px 26px 50px} .body,.verse{font-size:20px}}
+/* estampa: marca de agua narrativa, posición única por entrada */
+.stamp{position:absolute;pointer-events:none;user-select:none;mix-blend-mode:darken;z-index:0;opacity:0;animation:stampIn 2.2s ease forwards 1.3s}
+@keyframes stampIn{to{opacity:var(--so,.55)}}
+.date,.idx,.lead,.body,.verse{position:relative;z-index:1}
+.stamp--p1{top:54%;left:50%;transform:translate(-50%,-50%) rotate(-3deg);width:min(64%,340px);--so:.58}
+@media(max-width:760px){.stamp--p1{top:56%;width:min(72%,260px);--so:.62}}
 </style>
 </head>
 <body>
@@ -69,6 +75,7 @@ nav.scrolled{background:rgba(233,231,223,.82);backdrop-filter:blur(10px);padding
 </nav>
 
 <article class="wrap">
+ <img class="stamp stamp--p1" src="assets/out/plush_big_1.png" alt="" aria-hidden="true" loading="lazy" decoding="async"/>
  <div class="date reveal r1">12.05.25</div>
  <div class="idx reveal r1">entrada 1 de 4</div>
  <div class="lead reveal r2">como si lo divino también pudiera habitar en lo incorrecto.</div>

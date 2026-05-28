@@ -44,7 +44,7 @@ nav.scrolled{background:rgba(25,29,36,.6);backdrop-filter:blur(12px);padding:16p
 .head{position:relative;z-index:5;text-align:center;padding:185px 32px 50px}
 .head .star{font-size:22px;opacity:.5;display:block;margin-bottom:22px;animation:tw 4s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.3}50%{opacity:.7}}
-.head h1{font-size:clamp(52px,9vw,100px);font-weight:300}
+.head h1{font-style:italic;font-size:clamp(52px,9vw,100px);font-weight:300}
 .head .sub{font-style:italic;font-size:19px;opacity:.55;margin-top:20px}
 
 /* FEATURED */
@@ -101,6 +101,14 @@ nav.scrolled{background:rgba(25,29,36,.6);backdrop-filter:blur(12px);padding:16p
  .disco-grid{grid-template-columns:1fr 1fr;gap:26px 18px}
  .disc .t{font-size:20px}
 }
+/* estampa: marca de agua sobre fondo oscuro (invertir + screen) */
+.stamp{position:absolute;pointer-events:none;user-select:none;z-index:0;opacity:0;
+ filter:invert(1) hue-rotate(180deg);mix-blend-mode:screen;
+ animation:stampIn 2.2s ease forwards 1.3s}
+@keyframes stampIn{to{opacity:var(--so,.2)}}
+.feat-cover,.feat-info,.disc{position:relative;z-index:1}
+.stamp--musica{top:74%;right:-5%;transform:rotate(6deg);width:min(26%,200px);--so:.22}
+@media(max-width:760px){.stamp--musica{top:auto;bottom:-12%;right:-8%;transform:rotate(6deg);width:min(40%,150px);--so:.26}}
 .site-social{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:26px;opacity:.45;transition:opacity .4s}
 .site-social:hover{opacity:.7}
 .site-social a{color:#f2f1f7;text-decoration:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:opacity .3s}
@@ -125,6 +133,7 @@ nav.scrolled{background:rgba(25,29,36,.6);backdrop-filter:blur(12px);padding:16p
 
 <!-- FEATURED: kontando el tiempo (audio real) -->
 <section class="feat" id="feat">
+ <img class="stamp stamp--musica" src="assets/out/sketch_a_3.png" alt="" aria-hidden="true" loading="lazy" decoding="async"/>
  <div class="feat-cover">
   <img src="assets/covers/kontando-el-tiempo.jpg" alt="kontando el tiempo" fetchpriority="high" decoding="async"/>
   <span class="ring"></span>

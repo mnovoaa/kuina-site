@@ -59,6 +59,12 @@ nav.scrolled{background:rgba(233,231,223,.82);backdrop-filter:blur(10px);padding
 .back:focus,.pager a:focus{outline:none}
 .back:focus-visible,.pager a:focus-visible{outline:1px dotted var(--ink);outline-offset:6px;border-radius:2px}
 @media(max-width:760px){nav{padding:20px 22px} .nav-logo{display:none} .wrap{padding:150px 26px 50px} .body,.verse{font-size:20px}}
+/* estampa: marca de agua narrativa, posición única por entrada */
+.stamp{position:absolute;pointer-events:none;user-select:none;mix-blend-mode:darken;z-index:0;opacity:0;animation:stampIn 2.2s ease forwards 1.3s}
+@keyframes stampIn{to{opacity:var(--so,.55)}}
+.date,.idx,.lead,.body,.verse{position:relative;z-index:1}
+.stamp--p3{bottom:12%;left:-4%;transform:rotate(-2deg);width:min(64%,360px);--so:.6}
+@media(max-width:760px){.stamp--p3{bottom:-6%;left:50%;transform:translateX(-50%) rotate(-2deg);width:min(70%,260px);--so:.65}}
 </style>
 </head>
 <body>
@@ -69,6 +75,7 @@ nav.scrolled{background:rgba(233,231,223,.82);backdrop-filter:blur(10px);padding
 </nav>
 
 <article class="wrap">
+ <img class="stamp stamp--p3" src="assets/out/plush_big_5.png" alt="" aria-hidden="true" loading="lazy" decoding="async"/>
  <div class="date reveal r1">07.05.25</div>
  <div class="idx reveal r1">entrada 3 de 4</div>
  <div class="lead reveal r2">aún me extrañas?</div>
