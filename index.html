@@ -98,6 +98,17 @@ body.seen .logo-kuina{animation-delay:.1s,3s;animation-duration:1s,11s}
 @keyframes logoBreathe{0%,100%{opacity:.88}50%{opacity:.76}}
 .alas{position:absolute;right:6%;bottom:22%;width:230px;opacity:.55;z-index:4;animation:floaty 11s ease-in-out infinite}
 .conejo-hero{position:absolute;left:56px;bottom:130px;width:140px;opacity:.55;z-index:5;animation:floaty 14s ease-in-out infinite reverse}
+/* pantallas de desktop con poca altura: evita que el logo invada la frase */
+@media(min-width:820px) and (max-height:820px){
+ .logo-kuina{width:min(36vw,420px)}
+ .frase-tl{top:16%}
+ .frase-tr{top:17%}
+}
+@media(min-width:820px) and (max-height:700px){
+ .logo-kuina{width:min(32vw,380px)}
+ .frase-tl{top:13%;font-size:16px}
+ .frase-tr{top:14%;font-size:25px}
+}
 @keyframes floaty{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(1.5deg)}}
 
 /* ====== ESPACIO / SILENCIO ====== */
