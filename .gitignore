@@ -1,8 +1,30 @@
-# documentación interna del proyecto (no se despliega)
+# documentación interna (no se despliega)
 DOCUMENTACION.md
 
-# assets de prueba no usados en el sitio
+# entorno / configuración local
+.env
+
+# assets no usados en el sitio
 assets/gemini-*
+assets/grafitis kuina/
+
+# tags: solo se incluyen los dos usados en el site
+assets/tags/
+!assets/tags/tag_subele_fuerte.png
+!assets/tags/tag_malos_modales.png
+
+# sketches y plush sin referenciar en ningún HTML
+assets/out/plush_1.png
+assets/out/plush_2.png
+assets/out/plush_3.png
+assets/out/plush_4.png
+assets/out/sketch_a_1.png
+assets/out/sketch_a_2.png
+assets/out/sketch_b_1.png
+assets/out/sketch_b_2.png
+assets/out/sketch_b_4.png
+assets/out/plush_big_3.png
+assets/out/angel.png
 
 # backups y temporales
 *.bak
@@ -17,6 +39,6 @@ Thumbs.db
 .idea/
 memory/
 
-# logs y deps que no usamos
+# logs y deps
 node_modules/
 *.log

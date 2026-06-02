@@ -34,7 +34,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;o
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* ===== NAV ===== */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transform:translateZ(0);display:flex;align-items:center;justify-content:space-between;
  padding:26px 50px;transition:background .5s,padding .5s}
 nav.scrolled{background:rgba(233,231,223,.82);backdrop-filter:blur(10px);padding:16px 50px;border-bottom:1px solid rgba(40,58,82,.08)}
 @media(max-width:820px){nav.scrolled{padding:14px 22px}}

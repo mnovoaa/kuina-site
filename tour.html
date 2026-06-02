@@ -33,7 +33,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;o
  filter:blur(24px);animation:drift 34s ease-in-out infinite alternate}
 @keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(-3%,2%) scale(1.05)}}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:26px 50px;transition:background .5s,padding .5s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transform:translateZ(0);display:flex;align-items:center;justify-content:space-between;padding:26px 50px;transition:background .5s,padding .5s}
 nav.scrolled{background:rgba(25,29,36,.6);backdrop-filter:blur(12px);padding:16px 50px}
 @media(max-width:760px){nav.scrolled{padding:14px 22px}}
 .back{display:flex;align-items:center;gap:10px;color:#f2f1f7;text-decoration:none;font-size:14px;letter-spacing:.22em;text-transform:uppercase;opacity:.7;transition:opacity .4s,gap .4s}
