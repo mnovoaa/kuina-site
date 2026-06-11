@@ -1,4 +1,21 @@
-# KUINA — sitio
+<p align="center">
+  <img src="assets/preview.webp" alt="Sitio de KUINA" width="840">
+</p>
+
+<h1 align="center">KUINA — sitio oficial</h1>
+<p align="center"><b>Mundo atmosférico de artista · "Por Siempre Tour 2026" · by ShowUp</b></p>
+<p align="center"><a href="https://kuina-site.vercel.app"><b>🔗 kuina-site.vercel.app</b></a></p>
+<p align="center">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/Web%20Audio-API-FF5722">
+  <img src="https://img.shields.io/badge/Canvas-niebla%20%2B%20particulas-000000">
+  <img src="https://img.shields.io/badge/Vercel-deploy-000000?logo=vercel">
+</p>
+
+> Niebla y partículas, reproductor de audio real con waveform, diario por capítulos, fechas de
+> tour con links de venta reales y galería con lightbox.
+
+---
 
 Sitio de KUINA. HTML/CSS/JS puro, sin build ni dependencias.
 
